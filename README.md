@@ -36,7 +36,9 @@ Run
 ```
 python evaluate.py
 ```
-
+evaluate.py is hardcoded to call driver.txt, driver.txt has one test instance
+per row in the following format
+source_transcript source_wav_path target_transcript target_wav_path
 ## Repo Organization
 📦TTS Objective Metrics\
  ┣ 📂audio\
