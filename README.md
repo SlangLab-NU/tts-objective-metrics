@@ -32,36 +32,10 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Then, configure the global parameters as you wish in  config-> global.py. If not done, all statistics will be computed with the default parameters already set.
-
-The main usage of the repo is to calculate all available metrics for a batch of (ground truth, synthesized) audio pairs (test/eval set). For this make sure you have the (ground_truth, synthesized) audio pairs names **matching** and in **numbered order, each with the same number of digits of the greatest file** (eg. if there are 100 files, you shall start with 000.wav, if there are [10,99] you shall start with 00.wav). as in:
-
-📂My Audio\
- ┣ 📂Ground Truths\
- ┃ ┣ 📜00.wav\
- ┃ ┣ 📜01.wav\
- ┃ ┣ ...\
- ┣ 📂Synthesizeds\
- ┃ ┣ 📜00.wav\
- ┃ ┣ 📜01.wav\
- ┃ ┣ ...
-
-Then, choose one pitch computing algorithm and run the following command:
-```sh
-  python -m bin.compute_metrics --gt_folder_path 'My Audio\Ground Truths' --synth_folder_path 'My Audio\Synthesizeds' --pitch_algorithm 'yin'
-``` 
-The result will be saved in a file named metrics.json in the main repo folder: 'TTS Objective Metrics/metrics.json'.
-
-Alternatively, it is possible to calculate a single metric for a pair of (ground truth, synthesized) audio, by choosing an available metric and pitch computation method (yin or dio) with one of the following commands:
-```sh
-# For DTW, FFE, GPE, VDE, moments
-python -m metrics.DTW --gt_path 'ground_truth_audio.wav' --synth_path 'synthesized_audio.wav' --pitch_algorithm 'yin'
+Run
 ```
+python evaluate.py
 ```
-# For MSD or MCD   
-python -m metrics.MSD --gt_path 'path_to_ground_truth_audio.wav' --synth_path 'path_to_synthesized_audio.wav'           
-```
-The result will be displayed in the terminal.
 
 ## Repo Organization
 📦TTS Objective Metrics\
@@ -69,11 +43,16 @@ The result will be displayed in the terminal.
  ┃ ┣ 📜helpers.py\
  ┃ ┣ 📜pitch.py\
  ┃ ┣ 📜visuals.py\
- ┣ 📂bin\
+ ┣ 📂bin\ # this is legacy code
  ┃ ┣ 📜compute_metrics.py\
  ┣ 📂config\
  ┃ ┣ 📜global_config.py\
+ ┣ 📂examples\
  ┣ 📂metrics\
+ ┣ ┣ 📂sources\
+ ┣ ┣ ┣sources.wav
+ ┣ ┣ 📂targets\
+ ┣ ┣ ┣targets.wav.wav
  ┃ ┣ 📜dists.py\
  ┃ ┣ 📜DTW.py\
  ┃ ┣ 📜FFE.py\
@@ -83,7 +62,13 @@ The result will be displayed in the terminal.
  ┃ ┣ 📜moments.py\
  ┃ ┣ 📜MSD.py\
  ┃ ┣ 📜VDE.py\
+ ┃ ┣ 📜WER.py\
+ ┃ ┣ 📜SECS.py
  ┣ 📜README.md
+ ┣ 📜evaluate.py
+ ┣ 📜driver.txt
+
+
 
 ## How to Contribute
 As the repo is still in its infancy, feel free to either open an issue, discussion or send a pull request, or even contact us by e-mail.
