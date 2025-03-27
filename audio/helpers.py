@@ -9,3 +9,11 @@ def read_folder(path):
         x, sr = librosa.load(filename)
         out.append(x)
     return out, sr
+
+
+def load_audio_paths(audio_path_list):
+    out = list()
+    for filename in audio_path_list:
+        x, sr = librosa.load(filename)
+        out.append(x)
+    return out, sr
